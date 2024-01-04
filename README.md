@@ -1,6 +1,6 @@
 # RESTafaris API BACK-END
 
-This is a RESTful API for the ResTafaris application, developed using Java, Spring Boot, and SQL.
+This is a RESTful API for the RESTafaris application, developed using Java, Spring Boot, and SQL.
 
 ## Getting Started
 
