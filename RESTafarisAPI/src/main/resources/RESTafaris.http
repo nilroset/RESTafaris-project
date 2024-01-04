@@ -1,0 +1,206 @@
+### login gbusquets Testing DONE
+POST http://localhost:8080/authenticate
+content-type: application/json
+
+{
+  "username": "gbusquets",
+  "password": "password123"
+}
+> {%
+    client.global.set("auth_token", response.headers.valueOf("Authorization"));
+    client.log("token: " + response.headers.valueOf("Authorization"));
+%}
+
+### get available courses TESTING DONE
+GET http://localhost:8080/courses
+Authorization: {{auth_token}}
+
+### create course TESTING DONE
+POST http://localhost:8080/courses
+content-type: application/json
+Authorization: {{auth_token}}
+
+{
+  "title": "Bases de dades 90",
+  "description" : "gestio de dades",
+  "imageUrl" : "url",
+  "creator_id" : "6074b4c2-717f-11ee-b962-0242ac120002",
+  "category_id": "e4014b24-7432-11ee-b962-0242ac120002",
+  "language_id": "e4014ed0-7432-11ee-b962-0242ac120003"
+}
+
+### get courses by userId TESTING DONE
+GET http://localhost:8080/users/6074b4c2-717f-11ee-b962-0242ac120002/courses
+Authorization: {{auth_token}}
+
+### get course by id TESTING DONE
+GET http://localhost:8080/courses/72919b8e-6c4d-11ee-b962-0242ac120002
+Authorization: {{auth_token}}
+
+### update course TESTING DONE
+PUT http://localhost:8080/courses/72919b8e-6c4d-11ee-b962-0242ac120002
+content-type: application/json
+Authorization: {{auth_token}}
+
+{
+  "title": "Bases de dades 21",
+  "description" : "hols",
+  "imageUrl" : "url3",
+  "creator_id" : "6074b4c2-717f-11ee-b962-0242ac120002",
+  "category_id": "e4014b24-7432-11ee-b962-0242ac120002",
+  "language_id": "e4014b24-7432-11ee-b962-0242ac120002"
+}
+
+### update price TESTING DONE
+PATCH http://localhost:8080/courses/72919b8e-6c4d-11ee-b962-0242ac120002/price
+content-type: application/json
+Authorization: {{auth_token}}
+
+{
+ "currentPrice" : 30000
+}
+
+### update availability TESTING DONE
+PATCH http://localhost:8080/courses/72919b8e-6c4d-11ee-b962-0242ac120002/availability
+content-type: application/json
+Authorization: {{auth_token}}
+
+{
+ "availability" : false
+}
+
+### create category TESTING DONE
+POST http://localhost:8080/categories
+content-type: application/json
+Authorization: {{auth_token}}
+
+{
+  "name": "economia"
+}
+
+### create language TESTING DONE
+POST http://localhost:8080/languages
+content-type: application/json
+Authorization: {{auth_token}}
+
+{
+  "name": "chino"
+}
+
+### get users TESTING DONE
+GET http://localhost:8080/users
+Authorization: {{auth_token}}
+
+### delete category TESTING DONE
+DELETE http://localhost:8080/categories/93050bf5-952e-45be-adc4-7927d032cd0c
+Authorization: {{auth_token}}
+
+### get matched text and description TESTING DONE
+GET http://localhost:8080/courses/search?text=base
+Authorization: {{auth_token}}
+
+### filter the search of courses by a given set of categories and/or languages TESTING DONE
+GET http://localhost:8080/courses/categoriesLanguages?language=e4014ed0-7432-11ee-b962-0242ac120004
+Authorization: {{auth_token}}
+
+### create lesson (el posem a xarxes i serveis) TESTING DONE
+POST http://localhost:8080/lessons
+content-type: application/json
+Authorization: {{auth_token}}
+
+{
+  "title": "lesson 2",
+  "description": "introducción 1",
+  "duration": 1.5,
+  "videoUrl": "hols",
+  "courseId": "72919b8e-6c4d-11ee-b962-0242ac120002"
+}
+
+### get lessons by course id TESTING DONE
+GET http://localhost:8080/lessons/72919b8e-6c4d-11ee-b962-0242ac120002
+Authorization: {{auth_token}}
+
+### get lessons ordered TESTING DONE
+GET http://localhost:8080/lessons/72919b8e-6c4d-11ee-b962-0242ac120002/ordered
+Authorization: {{auth_token}}
+
+### reorder lessons TESTING DONE
+PUT http://localhost:8080/lessons/72919b8e-6c4d-11ee-b962-0242ac120002/order
+content-type: application/json
+Authorization: {{auth_token}}
+
+[
+  "7291d9dc-6c4d-11ee-b962-0242ac120006",
+  "7291d7c0-6c4d-11ee-b962-0242ac120004",
+  "7291d8ce-6c4d-11ee-b962-0242ac120005",
+  "7291d6b2-6c4d-11ee-b962-0242ac120003",
+  "7291d5a4-6c4d-11ee-b962-0242ac120002"
+]
+
+###purchase course TESTING DONE
+POST http://localhost:8080/course/72919b8e-6c4d-11ee-b962-0242ac120002/purchase
+Authorization: {{auth_token}}
+
+###add a review TESTING DONE
+PUT http://localhost:8080/course/72919b8e-6c4d-11ee-b962-0242ac120002/review
+content-type: application/json
+Authorization: {{auth_token}}
+
+    {
+      "title": "xx",
+      "content": "content",
+      "satisfaction": 1
+    }
+
+###edit review TESTING DONE
+PATCH http://localhost:8080/course/72919e18-6c4d-11ee-b962-0242ac120002/review
+content-type: application/json
+Authorization: {{auth_token}}
+
+{
+  "id": "71f2f50c-16b4-4431-862d-6f520821bdc1",
+  "title": "xarxes2",
+  "content": "content2",
+  "satisfaction": 1
+}
+
+###lessons as done TESTING DONE
+PATCH http://localhost:8080/lessons/7291d9dc-6c4d-11ee-b962-0242ac120006/markAsDone
+content-type: application/json
+Authorization: {{auth_token}}
+
+
+###get my courses TESTING DONE
+GET http://localhost:8080/courses/myCourses
+Authorization: {{auth_token}}
+
+###my created courses TESTING DONE
+GET http://localhost:8080/courses/getMyCreatedCourses
+Authorization: {{auth_token}}
+
+###get my not done purchased courses TESTING DONE
+GET http://localhost:8080/courses/myCourses/notFinished
+Authorization: {{auth_token}}
+
+###get courses unregistered TESTING DONE
+GET http://localhost:8080/courses/unregistered
+Authorization: {{auth_token}}
+
+###get reviews TESTING DONE
+GET http://localhost:8080/reviews?OrderByDate=false
+Authorization: {{auth_token}}
+
+###get users that have taken a course TESTING DONE
+GET http://localhost:8080/courses/72919b8e-6c4d-11ee-b962-0242ac120002/students
+content-type: application/json
+Authorization: {{auth_token}}
+
+###get best rated teachers TESTING DONE
+GET http://localhost:8080/teachers?x=1&year=2023
+content-type: application/json
+Authorization: {{auth_token}}
+
+###get top students TESTING DONE
+GET http://localhost:8080/students?x=2
+content-type: application/json
+Authorization: {{auth_token}}
