@@ -1,7 +1,7 @@
 # RESTafaris-project
 Fullstack application
 
-# ResTafaris API
+# RESTafaris API BACK-END
 
 This is a RESTful API for the ResTafaris application, developed using Java, Spring Boot, and SQL.
 
